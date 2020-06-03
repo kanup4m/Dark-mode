@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LocalContext } from './Context'
+import { motion } from "framer-motion"
+
 const Main = () => {
     const { toggleTheme, color, theme } = useContext(LocalContext)
     const { light, dark } = color
@@ -10,13 +12,20 @@ const Main = () => {
         <div className="app" style={{ backgroundColor: mode.bg }}>
             <div className="level">
                 <div>
-                    <h1 className="title" style={{ color: mode.title }}>Dark Mode Challenge</h1>
+                    <motion.h1 className="title" style={{ color: mode.title }} initial={{ scale: 0 }}
+                        animate={{ scale: [1, 2, 2, 1, 1] }}
+                        transition={{ duration: 0.5 }}>Dark Mode Challenge</motion.h1>
                 </div>
 
                 {/* --The button that should toggle dark mode-- */}
-                <button className="app__dark-mode-btn icon level-right" onClick={toggleTheme}>
+                <motion.button className="app__dark-mode-btn icon level-right" onClick={toggleTheme}
+                    whileTap={{
+                        scale: 1,
+                        rotate: -160,
+                        borderRadius: "100%"
+                    }}>
                     <FontAwesomeIcon icon={mode.icon} color={mode.iconColor} />
-                </button>
+                </motion.button>
 
             </div>
 
